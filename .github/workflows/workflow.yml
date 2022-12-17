@@ -5,13 +5,13 @@ on:
   workflow_call:
     inputs:
       includePrerelease:
+        required: true
         type: boolean
-        default: false
         description: Whether to include prerelease versions when searching for the latest version of the Carter NuGet package
 
       commitAndPush:
+        required: true
         type: boolean
-        default: false
         description: Whether to commit and push the changes; Useful to test the process by looking at the resulting Git diff
 
 jobs:

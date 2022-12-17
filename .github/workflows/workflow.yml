@@ -35,14 +35,14 @@ jobs:
       run: >-
         .github/update-carter-package-references/run.ps1
         -RootDirectory (Join-Path -Path $env:GITHUB_WORKSPACE -ChildPath 'self')
-        -IncludePrerelease:$${{ github.event.inputs.includePrerelease }}
+        -IncludePrerelease:$${{ inputs.includePrerelease }}
       shell: pwsh
 
     - name: Show Git diff
       run: git diff
 
     # https://github.com/marketplace/actions/checkout#push-a-commit-using-the-built-in-token
-    - if: github.event.inputs.commitAndPush
+    - if: inputs.commitAndPush
       name: Commit changes and push if necessary
       run: |
         GIT_CHANGES=$(git status --porcelain)

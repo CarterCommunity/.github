@@ -2,7 +2,7 @@
 name: Update Carter NuGet package references
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       includePrerelease:
         type: boolean

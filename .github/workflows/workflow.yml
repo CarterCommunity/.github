@@ -39,11 +39,13 @@ jobs:
       shell: pwsh
 
     - name: Show Git diff
+      working-directory: self
       run: git diff
 
     # https://github.com/marketplace/actions/checkout#push-a-commit-using-the-built-in-token
     - if: inputs.commitAndPush
       name: Commit changes and push if necessary
+      working-directory: self
       run: |
         GIT_CHANGES=$(git status --porcelain)
         if [ "$GIT_CHANGES" == "" ]; then

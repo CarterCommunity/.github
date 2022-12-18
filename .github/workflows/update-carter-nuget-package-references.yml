@@ -25,15 +25,15 @@ jobs:
       with:
         path: self
 
-    - name: Check out the CarterCommunity/.github repository
+    - name: Check out the CarterCommunity/build repository
       uses: actions/checkout@v3
       with:
-        repository: CarterCommunity/.github
-        path: .github
+        repository: CarterCommunity/build
+        path: build
 
     - name: Update package references with latest version from NuGet
       run: >-
-        .github/update-carter-package-references/run.ps1
+        build/update-carter-package-references/run.ps1
         -RootDirectory (Join-Path -Path $env:GITHUB_WORKSPACE -ChildPath 'self')
         -IncludePrerelease:$${{ inputs.includePrerelease }}
       shell: pwsh

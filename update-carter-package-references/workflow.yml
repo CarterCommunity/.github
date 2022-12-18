@@ -16,43 +16,7 @@ on:
 
 jobs:
   update-carter-package-references:
-    name: Update Carter NuGet package references
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Check out this repository
-      uses: actions/checkout@v3
-      with:
-        path: self
-
-    - name: Check out the CarterCommunity/.github repository
-      uses: actions/checkout@v3
-      with:
-        repository: CarterCommunity/.github
-        path: .github
-
-    - name: Update package references with latest version from NuGet
-      run: >-
-        .github/update-carter-package-references/run.ps1
-        -RootDirectory (Join-Path -Path $env:GITHUB_WORKSPACE -ChildPath 'self')
-        -IncludePrerelease:$${{ github.event.inputs.includePrerelease }}
-      shell: pwsh
-
-    - name: Show Git diff
-      run: git diff
-
-    # https://github.com/marketplace/actions/checkout#push-a-commit-using-the-built-in-token
-    - if: github.event.inputs.commitAndPush
-      name: Commit changes and push if necessary
-      run: |
-        GIT_CHANGES=$(git status --porcelain)
-        if [ "$GIT_CHANGES" == "" ]; then
-          echo "No changes to commit"
-        else
-          echo "Committing and pushing changes"
-          git config user.name Jonathan Channon
-          git config user.email jonathan.channon@gmail.com
-          git add .
-          git commit -m "Update Carter NuGet package references"
-          git push
-        fi
+    uses: CarterCommunity/build/.github/workflows/update-carter-package-references.yml@main
+    with:
+      includePrerelease: ${{ github.event.inputs.includePrerelease }}
+      commitAndPush: ${{ github.event.inputs.commitAndPush }}

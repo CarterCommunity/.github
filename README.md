@@ -1,6 +1,6 @@
 ## Reusable bits
 
-This repository contains actions that can be reused in other repositories.
+This repository contains actions and workflows that can be reused in other repositories.
 
 It currently includes:
 
